@@ -28,7 +28,7 @@ public class TokenUtilJwt {
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 
-	public Date getExpirationDateFromToken(String token) {
+	/*public Date getExpirationDateFromToken(String token) {
 		return getClaimFromToken(token, Claims::getExpiration);
 		
 		}
@@ -54,5 +54,5 @@ public class TokenUtilJwt {
 	
 	public String getUsernameFromToken(String token) {
 		return getClaimFromToken(token, Claims::getSubject);
-		}
+		}*/
 }

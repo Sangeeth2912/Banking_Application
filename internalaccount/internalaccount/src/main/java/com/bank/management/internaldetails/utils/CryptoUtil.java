@@ -31,7 +31,7 @@ public class CryptoUtil
 	        }
 	    }
 	 
-	    public static String encrypt(String strToEncrypt, String secret) 
+	   /* public static String encrypt(String strToEncrypt, String secret) 
 	    {
 	        try
 	        {
@@ -45,7 +45,7 @@ public class CryptoUtil
 	            System.out.println("Error while encrypting: " + e.toString());
 	        }
 	        return null;
-	    }
+	    }*/
 	 
 	    public static String decrypt(String strToDecrypt, String secret) 
 	    {
