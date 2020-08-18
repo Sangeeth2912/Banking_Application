@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bank.management.fetchaccount.model.request.FetchDetailsRequest;
 
 @Service
 @Component
 @Resource
-@FeignClient(name="internalaccount",url="http://localhost:8080")
+@FeignClient(name="internalaccount")
 public interface InternalClient {
 	@RequestMapping(value="/fetchIntDetails", method = RequestMethod.POST)
-	public String fetchDetails(@RequestHeader(value="Authorization") String token,@RequestBody FetchDetailsRequest req);
+	public String fetchDetails(@RequestParam("token") String token,@RequestBody FetchDetailsRequest req);
 }

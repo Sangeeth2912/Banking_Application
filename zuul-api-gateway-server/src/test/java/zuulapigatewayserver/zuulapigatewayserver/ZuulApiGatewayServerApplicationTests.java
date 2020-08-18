@@ -1,15 +1,13 @@
-package com.bank.management.fetch.fetchtestdetails;
-/*package com.bank.management.fetchdetails;
+package zuulapigatewayserver.zuulapigatewayserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FetchdetailsApplicationTests {
+class ZuulApiGatewayServerApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
 
 }
-*/

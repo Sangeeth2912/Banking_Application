@@ -100,6 +100,7 @@ public class ExternalDetailDaoImpl implements ExternalDetailDao
 				if(updateStatus==1)
 				{
 					response.setStatus(1);
+					response.setExt_account_balance(req.getAccount_balance());
 					response.setStatus_code("Data Added Successfully");
 				}
 				else

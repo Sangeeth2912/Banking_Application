@@ -8,6 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients("com.bank.management.internaldetails.session")
 @EnableDiscoveryClient
+
+
 public class InternalaccountApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InternalaccountApplication.class, args);

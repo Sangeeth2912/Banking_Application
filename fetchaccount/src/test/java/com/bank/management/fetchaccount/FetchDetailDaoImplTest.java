@@ -1,4 +1,4 @@
-package com.bank.management.internalaccount;
+package com.bank.management.fetchaccount;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,14 +15,15 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.bank.management.internaldetails.daoImpl.InternalDetailDaoImpl;
-import com.bank.management.internaldetails.model.request.InternalDetailsRequest;
+import com.bank.management.fetchaccount.daoImpl.FetchDetailDaoImpl;
+import com.bank.management.fetchaccount.model.request.FetchDetailsRequest;
+
 @RunWith(MockitoJUnitRunner.class)
-public class InternalDetailDaoImplTest 
+public class FetchDetailDaoImplTest 
 {
 	@InjectMocks
 	@Spy
-	InternalDetailDaoImpl obj;
+	FetchDetailDaoImpl obj;
 	
 	@Mock
 	ResultSet rs;
@@ -36,55 +37,40 @@ public class InternalDetailDaoImplTest
 	@Mock
 	Connection cn;
 	
-	@Mock
-	InternalDetailsRequest req;
-	
 	@Before
 	public void initMocks() {
 	}
 	
+	
 	@Test
 	public void fetchDetailsTest() throws SQLException
 	{
-		InternalDetailsRequest req=new InternalDetailsRequest();
-		req.setCustomer_id(123);
+		FetchDetailsRequest req=new FetchDetailsRequest();
+		req.customer_id=123;
 		Mockito.when(stmt.executeQuery(Mockito.anyString())).thenReturn(rs);
 		Mockito.doReturn(stmt).when(obj).getconnDetails();
 		Mockito.when(rs.next()).thenReturn(true);
-		Mockito.doReturn("password").when(obj).cardNumMasking(Mockito.anyString());
-		Mockito.when(rs.getInt(1)).thenReturn(123);
-		Mockito.when(rs.getString(2)).thenReturn("Test");
+		Mockito.when(rs.getInt(2)).thenReturn(123);
+		Mockito.when(rs.getString(1)).thenReturn("Test");
 		Mockito.when(rs.getString(3)).thenReturn("password");
 		obj.fetchDetails(req);
 	}
 	
-	@Test
-	public void fetchDetailsTest1() throws SQLException
-	{
-		InternalDetailsRequest req=new InternalDetailsRequest();
-		req.setCustomer_id(123);
-		Mockito.when(stmt.executeQuery(Mockito.anyString())).thenReturn(rs);
-		Mockito.doReturn(stmt).when(obj).getconnDetails();
-		obj.fetchDetails(req);
-	}
 	
 	@Test
-	public void getcardNumMaskingTest() {
-		Mockito.when(obj.cardNumMasking("UfsOb89SvYVLyUhjjYjzCibbBYrByXyHpmo0QTXw/Q8=")).thenReturn("cardno");
-		obj.cardNumMasking("UfsOb89SvYVLyUhjjYjzCibbBYrByXyHpmo0QTXw/Q8=");
+	public void fetchDetailsFailTest() throws SQLException
+	{
+		FetchDetailsRequest req=new FetchDetailsRequest();
+		req.customer_id=123;
+		Mockito.when(stmt.executeQuery(Mockito.anyString())).thenReturn(rs);
+		Mockito.doReturn(stmt).when(obj).getconnDetails();
+		Mockito.when(rs.next()).thenReturn(false);
+		obj.fetchDetails(req);
 	}
 	
 	@Test
 	public void getconnDetailsTest() {
 		obj.getconnDetails();
-	}
-	
-	@Test
-	public void fetchDetailsExceptionTest() throws SQLException
-	{
-		InternalDetailsRequest req=null;
-		Mockito.doReturn(stmt).when(obj).getconnDetails();
-		obj.fetchDetails(req);
 	}
 	
 }

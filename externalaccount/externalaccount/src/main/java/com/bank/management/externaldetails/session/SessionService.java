@@ -1,7 +1,5 @@
 package com.bank.management.externaldetails.session;
 
-import javax.annotation.Resource;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -11,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @Component
-@Resource
-@FeignClient(name="customermanagement",url="http://localhost:8081")
+
+@FeignClient(name="zuul-api-gateway-server/customermanagement")
 public interface SessionService {
 	@RequestMapping(value="/sessionValidation", method = RequestMethod.GET)
 	public String getSessionInfo(@RequestParam("token") String token);

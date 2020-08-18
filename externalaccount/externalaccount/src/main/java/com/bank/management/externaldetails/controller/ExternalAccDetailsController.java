@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.management.externaldetails.model.request.ExternalDetailsRequest;
@@ -26,7 +27,7 @@ public class ExternalAccDetailsController {
 	@Autowired SessionService sessionService;
 	@PostMapping(
 			value = "/fetchExtDetails", consumes = "application/json", produces = "application/json")
-	public String fetchAccountDetails(@RequestHeader(value="Authorization") String token,@RequestBody  ExternalDetailsRequest req) 
+	public String fetchAccountDetails(@RequestParam("token") String token,@RequestBody  ExternalDetailsRequest req) 
 	{
 		String resp = null;
 		if(token.isEmpty())
@@ -52,7 +53,7 @@ public class ExternalAccDetailsController {
 
 	@PostMapping(
 			value = "/addExtDetails", consumes = "application/json", produces = "application/json")
-	public String addAccountDetails(@RequestHeader(value="Authorization") String token,@RequestBody  ExternalDetailsRequest req) 
+	public String addAccountDetails(@RequestParam("token") String token,@RequestBody  ExternalDetailsRequest req) 
 	{
 		String resp = null;
 		if(token.isEmpty())
@@ -79,7 +80,7 @@ public class ExternalAccDetailsController {
 	
 	@PostMapping(
 			value = "/updateExtDetails", consumes = "application/json", produces = "application/json")
-	public String updateAccountDetails(@RequestHeader(value="Authorization") String token,@RequestBody  ExternalDetailsRequest req) 
+	public String updateAccountDetails(@RequestParam("token") String token,@RequestBody  ExternalDetailsRequest req) 
 	{
 		String resp = null;
 		if(token.isEmpty())
@@ -105,7 +106,7 @@ public class ExternalAccDetailsController {
 	
 	@PostMapping(
 			value = "/deleteAccountDetails", consumes = "application/json", produces = "application/json")
-	public String deleteAccountDetails(@RequestHeader(value="Authorization") String token,@RequestBody  ExternalDetailsRequest req) 
+	public String deleteAccountDetails(@RequestParam("token") String token,@RequestBody  ExternalDetailsRequest req) 
 	{
 		String resp = null;
 		if(token.isEmpty())

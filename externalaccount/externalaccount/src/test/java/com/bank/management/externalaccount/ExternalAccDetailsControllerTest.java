@@ -35,6 +35,7 @@ public class ExternalAccDetailsControllerTest
 		obj.fetchAccountDetails("token", req);
 	}
 	
+	
 	@Test
 	public void fetchSessionExpiredTest()
 	{

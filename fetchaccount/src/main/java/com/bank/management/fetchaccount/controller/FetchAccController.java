@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.bank.management.fetchaccount.model.request.FetchDetailsRequest;
 import com.bank.management.fetchaccount.model.response.CombinedResponse;
 import com.bank.management.fetchaccount.model.response.ExternalDetailsResponse;
@@ -18,7 +20,8 @@ import com.bank.management.fetchaccount.session.InternalClient;
 import com.bank.management.fetchaccount.session.SessionService;
 import com.google.gson.Gson;
 
-import io.netty.util.internal.StringUtil;
+import org.apache.commons.lang.StringUtils;
+
 
 
 @Component
@@ -31,7 +34,8 @@ public class FetchAccController
 	@Autowired InternalClient internalService;
 	@Autowired ExternalClient externalService;
 	@PostMapping(value = "/fetchDetails", consumes = "application/json", produces = "application/json")
-	public CombinedResponse fetchAccountDetails(@RequestHeader(value="Authorization") String token,@RequestBody FetchDetailsRequest req) 
+	//@HystrixCommand(fallbackMethod = "getDefaultResponse")
+	public CombinedResponse fetchAccountDetails(@RequestParam("token") String token,@RequestBody FetchDetailsRequest req) 
 	{
 		FetchDetailsResponse fetchresponse = null;
 		CombinedResponse finalResp=new CombinedResponse();
@@ -42,7 +46,7 @@ public class FetchAccController
 		else
 		{
 		String response=sessionService.getSessionInfo(token);
-		if(response.equalsIgnoreCase("Session is Valid") && !StringUtil.isNullOrEmpty(response) )
+		if(response.equalsIgnoreCase("Session is Valid") && !StringUtils.isEmpty(response) )
 		{
 		fetchresponse=fetchService.fetchDetails(req);
 		String intResponse=internalService.fetchDetails(token,req);
@@ -70,4 +74,13 @@ public class FetchAccController
 		}
 		return finalResp;
 	}
+	
+	
+	/*public CombinedResponse getDefaultResponse(String token,FetchDetailsRequest req)
+	{
+		CombinedResponse finalResp=new CombinedResponse();
+		finalResp.setSession_Status("Circuit Breaker");
+		return finalResp ;
+	}*/
+	
 	}

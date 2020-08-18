@@ -69,7 +69,6 @@ public class ExternalDetailDaoImplTest
 		obj.fetchDetails(req);
 	}
 	
-	
 	@Test
 	public void addDetailsTest() throws SQLException
 	{
@@ -145,28 +144,28 @@ public class ExternalDetailDaoImplTest
 		obj.getconnDetails();
 	}
 	
-	@Test(expected = Exception.class)
+	@Test
 	public void fetchDetailsExceptionTest() throws SQLException
 	{
 		ExternalDetailsRequest req=null;
 		Mockito.doReturn(stmt).when(obj).getconnDetails();
 		obj.fetchDetails(req);
 	}
-	@Test(expected = Exception.class)
+	@Test
 	public void addDetailsExceptionTest() throws SQLException
 	{
 		ExternalDetailsRequest req=null;
 		Mockito.doReturn(stmt).when(obj).getconnDetails();
 		obj.addDetails(req);
 	}
-	@Test(expected = Exception.class)
+	@Test
 	public void updateDetailsExceptionTest() throws SQLException
 	{
 		ExternalDetailsRequest req=null;
 		Mockito.doReturn(stmt).when(obj).getconnDetails();
 		obj.updateDetails(req);
 	}
-	@Test(expected = Exception.class)
+	@Test
 	public void deleteDetailsExceptionTest() throws SQLException
 	{
 		ExternalDetailsRequest req=null;
